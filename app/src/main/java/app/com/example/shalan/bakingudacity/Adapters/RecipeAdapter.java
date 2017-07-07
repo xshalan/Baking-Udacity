@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import app.com.example.shalan.bakingudacity.Model.Recipe;
 import app.com.example.shalan.bakingudacity.R;
@@ -20,7 +19,7 @@ import app.com.example.shalan.bakingudacity.Utils.OnRecipeClickListener;
  */
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
-    private List<Recipe> mRecipeList = new ArrayList<Recipe>();
+    private ArrayList<Recipe> mRecipeList = new ArrayList<Recipe>();
     private Context mContext;
     OnRecipeClickListener mOnRecipeClickListener ;
 
@@ -78,13 +77,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         @Override
         public void onClick(View view) {
             if(mOnRecipeClickListener!=null) {
-                mOnRecipeClickListener.onClick(view, getAdapterPosition());
+                mOnRecipeClickListener.onClick(view,mRecipeList ,getAdapterPosition());
                 Log.v("Main","Testing");
             }
 
         }
     }
-    public void setmRecipeList(List<Recipe> recipeList){
+    public void setmRecipeList(ArrayList<Recipe> recipeList){
         this.mRecipeList = recipeList ;
     }
 }

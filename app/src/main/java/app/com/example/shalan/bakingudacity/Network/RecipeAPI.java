@@ -1,6 +1,6 @@
 package app.com.example.shalan.bakingudacity.Network;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import app.com.example.shalan.bakingudacity.Model.Recipe;
 import retrofit2.Call;
@@ -12,7 +12,7 @@ import retrofit2.http.GET;
 
 public interface RecipeAPI {
     @GET(" ")
-    Call<List<Recipe>> getRecipes() ;
+    Call<ArrayList<Recipe>> getRecipes() ;
 
 
 

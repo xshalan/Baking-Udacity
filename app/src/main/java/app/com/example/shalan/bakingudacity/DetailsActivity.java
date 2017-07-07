@@ -8,19 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 
 import app.com.example.shalan.bakingudacity.Fragments.MainFragment;
 
-
-public class MainActivity extends AppCompatActivity {
-
+public class DetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_details);
 
         Fragment fragment = new MainFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.main_fragment_container, fragment).commit();
-
+        fragmentTransaction.add(R.id.details_container, fragment).commit();
     }
 }
