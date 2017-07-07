@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="2dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/recipe"
+                android:background="@color/background_card"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/recipe_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:textColor="@color/title"
+                    android:text="Lorem LoremLoremLorem "
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/commerce"
+                        android:tint="@color/background_card"
+                        android:id="@+id/imageView3"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="8dp" />
+
+                    <TextView
+                        android:layout_width="16dp"
+                        android:layout_height="15dp"
+                        android:text="99"
+                        android:id="@+id/ingredients"
+                        android:textColor="@color/title"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="8dp"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/steps"
+                        android:tint="@color/background_card"
+
+                        android:id="@+id/imageView2"
+                        android:textColor="@color/title"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="8dp" />
+
+                    <TextView
+                        android:layout_width="16dp"
+                        android:layout_height="15dp"
+                        android:text="99"
+                        android:id="@+id/steps"
+                        android:textColor="@color/title"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="8dp"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/waiter"
+
+                        android:tint="@color/background_card"
+                        android:id="@+id/imageView"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="8dp"/>
+
+                    <TextView
+                        android:layout_width="16dp"
+                        android:layout_height="15dp"
+                        android:text="99"
+                        android:id="@+id/serving"
+                        android:textColor="@color/title"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="8dp" />
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>
