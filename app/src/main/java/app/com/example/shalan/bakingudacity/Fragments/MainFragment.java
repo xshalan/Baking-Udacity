@@ -51,10 +51,12 @@ public class MainFragment extends Fragment implements OnRecipeClickListener{
 
     @Override
     public void onClick(View view, ArrayList<Recipe> recipeList , int Position) {
-        Intent intent = new Intent(getContext(), DetailsActivity.class) ;
+        Intent intent = new Intent(getActivity(), DetailsActivity.class) ;
         intent.putExtra("list",recipeList);
-        startActivity(intent);
+        intent.putExtra("position",Position);
         Log.v("Main",recipeList.get(Position).getIngredients().toString());
+        MainFragment.this.startActivity(intent);
+
     }
 
 
@@ -70,6 +72,7 @@ public class MainFragment extends Fragment implements OnRecipeClickListener{
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         Recipe_recyclerView.setLayoutManager(layoutManager);
 
+
         mRecipeAPI = getRecipes() ;
         getRecipe();
         return view;
@@ -79,7 +82,6 @@ public class MainFragment extends Fragment implements OnRecipeClickListener{
         mRecipeAPI.getRecipes().enqueue(new Callback<ArrayList<Recipe>>() {
             @Override
             public void onResponse(Call<ArrayList<Recipe>> call, Response<ArrayList<Recipe>> response) {
-                Log.v("Main","Success!" + response.body().size()) ;
                 recipeAdapter.setmRecipeList(response.body());
                 recipeAdapter.notifyDataSetChanged();
                 Recipe_recyclerView.setAdapter(recipeAdapter);

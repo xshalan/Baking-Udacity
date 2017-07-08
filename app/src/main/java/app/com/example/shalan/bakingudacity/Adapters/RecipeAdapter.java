@@ -2,7 +2,6 @@ package app.com.example.shalan.bakingudacity.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +77,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         public void onClick(View view) {
             if(mOnRecipeClickListener!=null) {
                 mOnRecipeClickListener.onClick(view,mRecipeList ,getAdapterPosition());
-                Log.v("Main","Testing");
             }
 
         }
