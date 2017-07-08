@@ -15,9 +15,6 @@ public class StepDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.step_details_activity);
-        Intent intent = getIntent() ;
-        List<Step> stepList = (List<Step>) intent.getSerializableExtra("step_list");
-        int Position = intent.getIntExtra("step_position",0);
-        Log.v("Step_details",stepList.get(Position).getDescription());
+
     }
 }
