@@ -42,7 +42,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Step step = mSteps.get(position);
-        //holder.step_id.setText(Integer.toString(step.getId()));
+        holder.step_id.setText(Integer.toString(step.getId()));
         holder.step_desc.setText(step.getShortDescription());
         if(mSteps.get(position).getVideoURL().length() != 0) {
             Glide.with(mContext).load(R.drawable.play).into(holder.step_video_image);
@@ -60,7 +60,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ViewHolder> 
         private ImageView step_video_image ;
         public ViewHolder(View itemView) {
             super(itemView);
-            //step_id = (TextView) itemView.findViewById(R.id.step_id);
+            step_id = (TextView) itemView.findViewById(R.id.step_id);
             step_desc = (TextView) itemView.findViewById(R.id.step_description);
             step_video_image = (ImageView) itemView.findViewById(R.id.step_video);
             itemView.setOnClickListener(this);
