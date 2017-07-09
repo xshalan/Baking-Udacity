@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -32,6 +34,13 @@ import app.com.example.shalan.bakingudacity.R;
 public class StepDetailsFragment extends Fragment {
     private SimpleExoPlayer exoPlayer ;
     private SimpleExoPlayerView exoPlayerView ;
+    private TextView step_desc ;
+
+    int Position ;
+    List<Step> stepList;
+
+    private Button previous ;
+    private Button next ;
 
     public StepDetailsFragment() {
         // Required empty public constructor
@@ -44,18 +53,57 @@ public class StepDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_step_details, container, false);
         Intent intent = getActivity().getIntent() ;
-        List<Step> stepList = (List<Step>) intent.getSerializableExtra("step_list");
-        int Position = intent.getIntExtra("step_position",0);
+        stepList = (List<Step>) intent.getSerializableExtra("step_list");
+        Position = intent.getIntExtra("step_position",0);
         Uri url = Uri.parse(stepList.get(Position).getVideoURL()) ;
-        Log.v("Step_details",stepList.get(Position).getDescription());
-        
+
+        exoPlayerView = (SimpleExoPlayerView) view.findViewById(R.id.player_view);
+        step_desc = (TextView)  view.findViewById(R.id.step_details_desc);
+        previous = (Button) view.findViewById(R.id.previous);
+        next = (Button) view.findViewById(R.id.next);
+        step_desc.setText(stepList.get(Position).getDescription());
+        Log.v("Step_details",stepList.get(Position).getVideoURL());
         initializePlayer(url) ;
+
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Position > 0 ){
+                    Position--;
+                    step_desc.setText(stepList.get(Position).getDescription());
+                    resetExoPlayer() ;
+                    Uri new_url = Uri.parse(stepList.get(Position).getVideoURL()) ;
+                    initializePlayer(new_url) ;
+                }
+            }
+        });
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Position <stepList.size() -1 ){
+                    Position++;
+                    step_desc.setText(stepList.get(Position).getDescription());
+                    resetExoPlayer() ;
+                    Uri new_url = Uri.parse(stepList.get(Position).getVideoURL()) ;
+                    initializePlayer(new_url) ;
+                }
+            }
+        });
         return view ;
     }
 
     public void initializePlayer(Uri videoUri){
             if(exoPlayer == null){
-                exoPlayer = ExoPlayerFactory.newSimpleInstance(getContext(),new DefaultTrackSelector(),new DefaultLoadControl()) ;
+                DefaultTrackSelector defaultTrackSelector = new DefaultTrackSelector() ;
+                DefaultLoadControl loadControl = new DefaultLoadControl();
+
+
+                exoPlayer = ExoPlayerFactory.newSimpleInstance(getContext(),
+                        defaultTrackSelector,
+                        loadControl
+                ) ;
+
                 exoPlayerView.setPlayer(exoPlayer);
                 MediaSource mediaSource = new ExtractorMediaSource(
                         videoUri,
@@ -66,7 +114,13 @@ public class StepDetailsFragment extends Fragment {
                 ) ;
                 exoPlayer.prepare(mediaSource);
                 exoPlayer.setPlayWhenReady(true);
+
             }
+
+    }
+    public void resetExoPlayer(){
+        exoPlayer.seekTo(0);
+        exoPlayer.setPlayWhenReady(false);
 
     }
 

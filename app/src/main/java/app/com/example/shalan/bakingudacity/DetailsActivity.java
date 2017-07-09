@@ -19,5 +19,7 @@ public class DetailsActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.details_container, fragment).commit();
+
+
     }
 }

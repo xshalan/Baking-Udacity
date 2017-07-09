@@ -2,11 +2,14 @@ package app.com.example.shalan.bakingudacity.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +42,12 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Step step = mSteps.get(position);
-        holder.step_id.setText(Integer.toString(step.getId()));
+        //holder.step_id.setText(Integer.toString(step.getId()));
         holder.step_desc.setText(step.getShortDescription());
+        if(mSteps.get(position).getVideoURL().length() != 0) {
+            Glide.with(mContext).load(R.drawable.play).into(holder.step_video_image);
+        }
+        Log.v("length",String.valueOf(mSteps.get(position).getVideoURL().length()));
     }
 
     @Override
@@ -53,7 +60,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ViewHolder> 
         private ImageView step_video_image ;
         public ViewHolder(View itemView) {
             super(itemView);
-            step_id = (TextView) itemView.findViewById(R.id.step_id);
+            //step_id = (TextView) itemView.findViewById(R.id.step_id);
             step_desc = (TextView) itemView.findViewById(R.id.step_description);
             step_video_image = (ImageView) itemView.findViewById(R.id.step_video);
             itemView.setOnClickListener(this);
