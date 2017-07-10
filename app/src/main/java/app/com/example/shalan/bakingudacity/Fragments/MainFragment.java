@@ -3,6 +3,7 @@ package app.com.example.shalan.bakingudacity.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -68,9 +69,16 @@ public class MainFragment extends Fragment implements OnRecipeClickListener{
 
         Recipe_recyclerView = (RecyclerView) view.findViewById(R.id.recipe_recyclerView);
         recipeAdapter = new RecipeAdapter(getContext(),this);
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        Recipe_recyclerView.setLayoutManager(layoutManager);
+        if(getResources().getBoolean(R.bool.isTablet)){
+            GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2) ;
+            Recipe_recyclerView.setLayoutManager(layoutManager);
+        }else {
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            Recipe_recyclerView.setLayoutManager(layoutManager);
+        }
+
+
 
 
         mRecipeAPI = getRecipes() ;

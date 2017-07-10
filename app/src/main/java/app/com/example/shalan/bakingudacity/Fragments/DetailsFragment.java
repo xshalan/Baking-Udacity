@@ -77,10 +77,23 @@ public class DetailsFragment extends Fragment implements OnStepClickListener{
 
     @Override
     public void onStepClick(View view, List<Step> stepList, int Position) {
-        Intent intent = new Intent(getActivity(), StepDetailsActivity.class) ;
-        intent.putExtra("step_list", (Serializable) stepList);
-        intent.putExtra("step_position",Position);
-        getActivity().startActivity(intent);
-        Log.v("Step","Clicked "+ Position) ;
+        if(getResources().getBoolean(R.bool.isTablet)){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("step_list", (Serializable) stepList);
+            bundle.putInt("step_position", Position);
+            Fragment fragment = new StepDetailsFragment();
+            fragment.setArguments(bundle);
+
+            getFragmentManager().beginTransaction()
+                    .add(R.id.step_details_fragment_tablet, fragment)
+                    .commit();
+        }else
+            {
+            Intent intent = new Intent(getActivity(), StepDetailsActivity.class);
+            intent.putExtra("step_list", (Serializable) stepList);
+            intent.putExtra("step_position", Position);
+            getActivity().startActivity(intent);
+            Log.v("Step", "Clicked " + Position);
+        }
     }
 }

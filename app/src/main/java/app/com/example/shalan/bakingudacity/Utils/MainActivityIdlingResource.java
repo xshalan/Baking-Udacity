@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Created by noura on 10/07/2017.
  */
 
-public class RecipeIdlingResource implements IdlingResource {
+public class MainActivityIdlingResource implements IdlingResource {
     private AtomicBoolean mIsIdleNow = new AtomicBoolean() ;
 
     @Nullable
@@ -28,4 +28,6 @@ public class RecipeIdlingResource implements IdlingResource {
     public void registerIdleTransitionCallback(ResourceCallback callback) {
             mCallback = callback ;
     }
+
+
 }

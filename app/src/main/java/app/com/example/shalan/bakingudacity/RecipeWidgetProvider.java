@@ -30,7 +30,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
             float quantity = recipe.getIngredients().get(i).getQuantity();
             description += "" + (i+1) +". " + quantity +" " + measure + " " + ingredient +"\n" ;
         }
-        view.setTextViewText(R.id.recipe_widget_view, description);
+        view.setTextViewText(R.id.recipe_widget_view, "jjjjjjjjj");
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, view);
 
@@ -44,7 +44,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-
+        RecipeWidgetService.startActinoUpdateWidget(context);
     }
 
     @Override

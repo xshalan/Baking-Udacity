@@ -55,8 +55,15 @@ public class StepDetailsFragment extends Fragment {
         Intent intent = getActivity().getIntent() ;
         stepList = (List<Step>) intent.getSerializableExtra("step_list");
         Position = intent.getIntExtra("step_position",0);
-        Uri url = Uri.parse(stepList.get(Position).getVideoURL()) ;
 
+        if(stepList ==null){
+            Bundle bundle = this.getArguments()  ;
+            if (bundle!=null){
+                stepList = (List<Step>) bundle.getSerializable("step_list");
+                Position = bundle.getInt("step_position") ;
+            }
+        }
+        Uri url = Uri.parse(stepList.get(Position).getVideoURL()) ;
         exoPlayerView = (SimpleExoPlayerView) view.findViewById(R.id.player_view);
         step_desc = (TextView)  view.findViewById(R.id.step_details_desc);
         previous = (Button) view.findViewById(R.id.previous);

@@ -35,6 +35,13 @@ public class MainActivityTest {
 
     @Test
     public void testClickonRecipeRecyclerview_OpenDetailsActivity(){
+        // giving up :(
+        try {
+                        Thread.sleep(4000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
         onView(withId(R.id.recipe_recyclerView))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
 

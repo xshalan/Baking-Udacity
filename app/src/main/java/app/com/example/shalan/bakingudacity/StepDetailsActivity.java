@@ -24,6 +24,7 @@ public class StepDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent() ;
         List<Step> stepList = (List<Step>) intent.getSerializableExtra("step_list");
         int Position = intent.getIntExtra("step_position",0);
+
         getSupportActionBar().setTitle(stepList.get(Position).getShortDescription());
 
         Fragment fragment = new StepDetailsFragment();

@@ -11,13 +11,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import app.com.example.shalan.bakingudacity.Fragments.MainFragment;
-import app.com.example.shalan.bakingudacity.Utils.RecipeIdlingResource;
+import app.com.example.shalan.bakingudacity.Utils.MainActivityIdlingResource;
 
 
 public class MainActivity extends AppCompatActivity {
 
     @Nullable
-    private RecipeIdlingResource mRecipeIdlingResource;
+    private MainActivityIdlingResource mMainActivityIdlingResource;
 
 
     @Override
@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
     @VisibleForTesting
     @NonNull
     public IdlingResource getIdlingResource(){
-        if (mRecipeIdlingResource == null)
-            mRecipeIdlingResource = new RecipeIdlingResource() ;
+        if (mMainActivityIdlingResource == null)
+            mMainActivityIdlingResource = new MainActivityIdlingResource() ;
 
-        return mRecipeIdlingResource;
+        return mMainActivityIdlingResource;
     }
 }
