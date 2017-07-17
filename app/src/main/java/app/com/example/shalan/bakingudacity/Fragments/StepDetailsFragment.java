@@ -125,10 +125,19 @@ public class StepDetailsFragment extends Fragment {
             }
 
     }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        exoPlayer.release();
+    }
+
     public void resetExoPlayer(){
         exoPlayer.seekTo(0);
         exoPlayer.setPlayWhenReady(false);
 
     }
+
 
 }

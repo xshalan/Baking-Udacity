@@ -13,6 +13,7 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if(getResources().getBoolean(R.bool.isTablet)){
             setContentView(R.layout.details_fragments);
             Fragment fragment = new DetailsFragment();

@@ -5,18 +5,37 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.RemoteViews;
 
-import app.com.example.shalan.bakingudacity.Model.Recipe;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.List;
+
+import app.com.example.shalan.bakingudacity.Model.Ingredient;
+
+import static app.com.example.shalan.bakingudacity.R.drawable.recipe;
 
 /**
  * Implementation of App Widget functionality.
  */
 public class RecipeWidgetProvider extends AppWidgetProvider {
 
-    static void updateAppWidget(Context context,Recipe recipe, AppWidgetManager appWidgetManager,
+    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
-        Intent intent  = new Intent() ;
+        Gson gson = new Gson() ;
+        SharedPreferences sharedPreferences = context.getSharedPreferences("pref",Context.MODE_PRIVATE) ;
+        String json = sharedPreferences.getString("List","") ;
+        String recipe_name = sharedPreferences.getString("Name","") ;
+        Type listType = new TypeToken<List<Ingredient>>(){}.getType();
+
+        List<Ingredient> ingredients = gson.fromJson(json,listType);
+        Log.v("RecipeWidgetProvider",ingredients.toString()) ;
+
+        Intent intent  = new Intent(context,DetailsActivity.class) ;
         intent.putExtra("recipe",recipe) ;
         PendingIntent pendingIntent = PendingIntent.getActivity(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT) ;
 
@@ -24,21 +43,22 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         view.setOnClickPendingIntent(R.id.recipe_widget_view,pendingIntent);
 
         String description = "" ;
-        for(int i=0 ; i< recipe.getIngredients().size() ; i++ ){
-            String ingredient = recipe.getIngredients().get(i).getIngredient();
-            String measure = recipe.getIngredients().get(i).getMeasure();
-            float quantity = recipe.getIngredients().get(i).getQuantity();
+        for(int i=0 ; i< ingredients.size() ; i++ ){
+            String ingredient = ingredients.get(i).getIngredient();
+            String measure = ingredients.get(i).getMeasure();
+            float quantity = ingredients.get(i).getQuantity();
             description += "" + (i+1) +". " + quantity +" " + measure + " " + ingredient +"\n" ;
         }
-        view.setTextViewText(R.id.recipe_widget_view, "jjjjjjjjj");
+        view.setTextViewText(R.id.text_ingre_list, description);
+        view.setTextViewText(R.id.text_ingre_name, recipe_name);
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, view);
 
     }
-    public static void updateRecipeWidget(Context context, Recipe recipe, AppWidgetManager appWidgetManager, int[] appWidgetIds){
+    public static void updateRecipeWidget(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
         // There may be multiple widgets active, so update all of them
                 for (int appWidgetId : appWidgetIds) {
-                    updateAppWidget(context, recipe ,appWidgetManager, appWidgetId);
+                    updateAppWidget(context,appWidgetManager, appWidgetId);
                 }
     }
 
