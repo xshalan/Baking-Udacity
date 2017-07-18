@@ -10,12 +10,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Ingredient implements Serializable
-{
+public class Ingredient implements Serializable {
 
     @SerializedName("quantity")
     @Expose
-    private Float  quantity;
+    private Float quantity;
     @SerializedName("measure")
     @Expose
     private String measure;
@@ -24,11 +23,11 @@ public class Ingredient implements Serializable
     private String ingredient;
     private final static long serialVersionUID = 4525586496596448376L;
 
-    public Float  getQuantity() {
+    public Float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Float  quantity) {
+    public void setQuantity(Float quantity) {
         this.quantity = quantity;
     }
 

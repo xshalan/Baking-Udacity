@@ -23,32 +23,32 @@ import app.com.example.shalan.bakingudacity.Utils.OnRecipeClickListener;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
     private ArrayList<Recipe> mRecipeList = new ArrayList<Recipe>();
     private Context mContext;
-    OnRecipeClickListener mOnRecipeClickListener ;
+    OnRecipeClickListener mOnRecipeClickListener;
 
-    public RecipeAdapter(Context mContext,OnRecipeClickListener onRecipeClickListener){
-        this.mContext= mContext ;
-        mOnRecipeClickListener = onRecipeClickListener ;
+    public RecipeAdapter(Context mContext, OnRecipeClickListener onRecipeClickListener) {
+        this.mContext = mContext;
+        mOnRecipeClickListener = onRecipeClickListener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View view = inflater.inflate(R.layout.recipe_card_view,parent,false) ;
-        ViewHolder mRecipeViewHolder = new ViewHolder(view) ;
+        View view = inflater.inflate(R.layout.recipe_card_view, parent, false);
+        ViewHolder mRecipeViewHolder = new ViewHolder(view);
 
-         return mRecipeViewHolder;
+        return mRecipeViewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Recipe mRecipe = mRecipeList.get(position);
         holder.recipe_name.setText(mRecipe.getName());
-        holder.ingredients.setText(Integer.toString(mRecipe.getIngredients().size()) );
+        holder.ingredients.setText(Integer.toString(mRecipe.getIngredients().size()));
         holder.serving.setText(Integer.toString(mRecipe.getServings()));
-        holder.step.setText(Integer.toString(mRecipe.getSteps().size()) );
-        if(mRecipe.getImage().length() != 0){
+        holder.step.setText(Integer.toString(mRecipe.getSteps().size()));
+        if (mRecipe.getImage().length() != 0) {
             Glide.with(mContext).load(mRecipe.getImage()).into(holder.recipe_image);
-        }else{
+        } else {
             //Nothing to show ;
         }
 
@@ -61,21 +61,22 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private Recipe mRecipe ;
+        private Recipe mRecipe;
         //@BindView(R.id.recipe_name)
-        TextView recipe_name ;
+        TextView recipe_name;
         //@BindView(ingredients)
-        TextView ingredients ;
+        TextView ingredients;
         //@BindView(R.id.serving)
-        TextView serving ;
+        TextView serving;
         //@BindView(R.id.steps)
-        TextView step ;
-        ImageView recipe_image ;
+        TextView step;
+        ImageView recipe_image;
+
         public ViewHolder(View itemView) {
             super(itemView);
             //ButterKnife.bind(this,itemView) ;
             recipe_name = (TextView) itemView.findViewById(R.id.recipe_name);
-            ingredients  = (TextView) itemView.findViewById(R.id.ingredients);
+            ingredients = (TextView) itemView.findViewById(R.id.ingredients);
             serving = (TextView) itemView.findViewById(R.id.serving);
             step = (TextView) itemView.findViewById(R.id.steps);
             recipe_image = (ImageView) itemView.findViewById(R.id.recipe_image_view);
@@ -85,13 +86,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
         @Override
         public void onClick(View view) {
-            if(mOnRecipeClickListener!=null) {
-                mOnRecipeClickListener.onClick(view,mRecipeList ,getAdapterPosition());
+            if (mOnRecipeClickListener != null) {
+                mOnRecipeClickListener.onClick(view, mRecipeList, getAdapterPosition());
             }
 
         }
     }
-    public void setmRecipeList(ArrayList<Recipe> recipeList){
-        this.mRecipeList = recipeList ;
+
+    public void setmRecipeList(ArrayList<Recipe> recipeList) {
+        this.mRecipeList = recipeList;
     }
 }

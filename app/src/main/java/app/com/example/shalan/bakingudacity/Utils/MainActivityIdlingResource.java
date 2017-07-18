@@ -3,14 +3,13 @@ package app.com.example.shalan.bakingudacity.Utils;
 import android.support.annotation.Nullable;
 import android.support.test.espresso.IdlingResource;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 /**
  * Created by noura on 10/07/2017.
  */
 
 public class MainActivityIdlingResource implements IdlingResource {
-    private AtomicBoolean mIsIdleNow = new AtomicBoolean() ;
+
+    private boolean mIsIdleNow = false  ;
 
     @Nullable
     private volatile ResourceCallback mCallback ;
@@ -21,7 +20,7 @@ public class MainActivityIdlingResource implements IdlingResource {
 
     @Override
     public boolean isIdleNow() {
-        return mIsIdleNow.get();
+        return mIsIdleNow;
     }
 
     @Override
@@ -29,5 +28,12 @@ public class MainActivityIdlingResource implements IdlingResource {
             mCallback = callback ;
     }
 
+    public void setIdleState(boolean isIdleNow) {
+        mIsIdleNow =isIdleNow ;
+         if (isIdleNow && mCallback != null) {
+            mCallback.onTransitionToIdle();
+
+        }
+    }
 
 }

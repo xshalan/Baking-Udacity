@@ -21,9 +21,9 @@ public class StepDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.step_details_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Intent intent = getIntent() ;
+        Intent intent = getIntent();
         List<Step> stepList = (List<Step>) intent.getSerializableExtra("step_list");
-        int Position = intent.getIntExtra("step_position",0);
+        int Position = intent.getIntExtra("step_position", 0);
 
         getSupportActionBar().setTitle(stepList.get(Position).getShortDescription());
 

@@ -7,12 +7,38 @@
     android:orientation="vertical"
     android:layout_weight="1"
     tools:context="app.com.example.shalan.bakingudacity.StepDetailsActivity">
-    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:id="@+id/player_view">
+        android:layout_height="300dp">
 
-    </com.google.android.exoplayer2.ui.SimpleExoPlayerView>
+    <!-- Play_Button -->
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/exo_thumbnail_play"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:src="@drawable/playbutton" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/exo_thumbnail"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/exo_no_video"
+            android:src="@drawable/novideo"/>
+
+        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/player_view">
+
+        </com.google.android.exoplayer2.ui.SimpleExoPlayerView>
+
+    </FrameLayout>
+
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"

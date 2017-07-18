@@ -26,40 +26,46 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
-        Gson gson = new Gson() ;
-        SharedPreferences sharedPreferences = context.getSharedPreferences("pref",Context.MODE_PRIVATE) ;
-        String json = sharedPreferences.getString("List","") ;
-        String recipe_name = sharedPreferences.getString("Name","") ;
-        Type listType = new TypeToken<List<Ingredient>>(){}.getType();
+        Gson gson = new Gson();
+        SharedPreferences sharedPreferences = context.getSharedPreferences("pref", Context.MODE_PRIVATE);
 
-        List<Ingredient> ingredients = gson.fromJson(json,listType);
-        Log.v("RecipeWidgetProvider",ingredients.toString()) ;
+        String json = sharedPreferences.getString("List", "");
+        String recipe_name = sharedPreferences.getString("Name", "");
+        Type listType = new TypeToken<List<Ingredient>>() {
+        }.getType();
 
-        Intent intent  = new Intent(context,DetailsActivity.class) ;
-        intent.putExtra("recipe",recipe) ;
-        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT) ;
+        List<Ingredient> ingredients = gson.fromJson(json, listType);
+        Log.v("RecipeWidgetProvider", ingredients.toString());
+
+        Intent intent = new Intent(context, DetailsActivity.class);
+        intent.putExtra("recipe", recipe);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         RemoteViews view = new RemoteViews(context.getPackageName(), R.layout.recipe_widget);
-        view.setOnClickPendingIntent(R.id.recipe_widget_view,pendingIntent);
+        view.setOnClickPendingIntent(R.id.recipe_widget_view, pendingIntent);
 
-        String description = "" ;
-        for(int i=0 ; i< ingredients.size() ; i++ ){
+        String description = "";
+        for (int i = 0; i < ingredients.size(); i++) {
             String ingredient = ingredients.get(i).getIngredient();
             String measure = ingredients.get(i).getMeasure();
             float quantity = ingredients.get(i).getQuantity();
-            description += "" + (i+1) +". " + quantity +" " + measure + " " + ingredient +"\n" ;
+            description += " * " + quantity + " " + measure + " " + ingredient + "\n";
         }
-        view.setTextViewText(R.id.text_ingre_list, description);
-        view.setTextViewText(R.id.text_ingre_name, recipe_name);
+        if (description != null && recipe_name != null) {
+            view.setTextViewText(R.id.text_ingre_list, description);
+            view.setTextViewText(R.id.text_ingre_name, recipe_name);
+        }
+
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, view);
 
     }
-    public static void updateRecipeWidget(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
+
+    public static void updateRecipeWidget(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
-                for (int appWidgetId : appWidgetIds) {
-                    updateAppWidget(context,appWidgetManager, appWidgetId);
-                }
+        for (int appWidgetId : appWidgetIds) {
+            updateAppWidget(context, appWidgetManager, appWidgetId);
+        }
     }
 
     @Override

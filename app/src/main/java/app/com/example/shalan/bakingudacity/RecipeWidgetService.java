@@ -17,7 +17,7 @@ import app.com.example.shalan.bakingudacity.Model.Recipe;
 public class RecipeWidgetService extends IntentService {
 
     public static final String RECIPE_ACTION_UPDATE =
-            "app.com.example.shalan.bakingudacity.action.update" ;
+            "app.com.example.shalan.bakingudacity.action.update";
 
 
     public RecipeWidgetService() {
@@ -26,17 +26,18 @@ public class RecipeWidgetService extends IntentService {
 
     }
 
-    public static void startActinoUpdateWidget(Context context){
-        Intent intent = new Intent(context,RecipeWidgetService.class);
+    public static void startActinoUpdateWidget(Context context) {
+        Intent intent = new Intent(context, RecipeWidgetService.class);
         intent.setAction(RECIPE_ACTION_UPDATE);
-        Log.v("Service :","startActinoUpdateWidget") ;
+        Log.v("Service :", "startActinoUpdateWidget");
         context.startService(intent);
     }
+
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         Boolean bundle = intent.hasExtra("test");
 //        String reciveing = bundle.getString("test") ;
-        Log.v("Service onHandleIntent:", bundle +" is done!") ;
+        Log.v("Service onHandleIntent:", bundle + " is done!");
 
         if (intent != null) {
             final String action = intent.getAction();
@@ -48,13 +49,10 @@ public class RecipeWidgetService extends IntentService {
     }
 
 
-
-
-
     private void handleActinoUpdateWidget(Recipe recipe) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, RecipeWidgetProvider.class));
-        RecipeWidgetProvider.updateRecipeWidget(this,appWidgetManager,appWidgetIds);
+        RecipeWidgetProvider.updateRecipeWidget(this, appWidgetManager, appWidgetIds);
 
     }
 }

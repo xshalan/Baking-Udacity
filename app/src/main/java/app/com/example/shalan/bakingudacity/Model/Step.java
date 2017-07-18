@@ -3,13 +3,13 @@ package app.com.example.shalan.bakingudacity.Model;
 /**
  * Created by noura on 05/07/2017.
  */
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Step implements Serializable
-{
+public class Step implements Serializable {
 
     @SerializedName("id")
     @Expose

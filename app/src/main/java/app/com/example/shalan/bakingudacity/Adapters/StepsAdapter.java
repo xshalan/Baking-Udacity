@@ -25,17 +25,18 @@ import app.com.example.shalan.bakingudacity.Utils.OnStepClickListener;
 public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ViewHolder> {
     private List<Step> mSteps = new ArrayList<Step>();
     private Context mContext;
-    private OnStepClickListener mOnStepClickListener ;
+    private OnStepClickListener mOnStepClickListener;
 
-    public StepsAdapter(Context mContext,OnStepClickListener mOnStepClickListener){
-        this.mContext = mContext ;
-        this.mOnStepClickListener = mOnStepClickListener ;
+    public StepsAdapter(Context mContext, OnStepClickListener mOnStepClickListener) {
+        this.mContext = mContext;
+        this.mOnStepClickListener = mOnStepClickListener;
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View view = inflater.inflate(R.layout.step_card_view,parent,false) ;
-        ViewHolder mStepViewHolder = new ViewHolder(view) ;
+        View view = inflater.inflate(R.layout.step_card_view, parent, false);
+        ViewHolder mStepViewHolder = new ViewHolder(view);
         return mStepViewHolder;
     }
 
@@ -44,20 +45,22 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ViewHolder> 
         Step step = mSteps.get(position);
         holder.step_id.setText(Integer.toString(step.getId()));
         holder.step_desc.setText(step.getShortDescription());
-        if(mSteps.get(position).getVideoURL().length() != 0) {
+        if (mSteps.get(position).getVideoURL().length() != 0) {
             Glide.with(mContext).load(R.drawable.play).into(holder.step_video_image);
         }
-        Log.v("length",String.valueOf(mSteps.get(position).getVideoURL().length()));
+        Log.v("length", String.valueOf(mSteps.get(position).getVideoURL().length()));
     }
 
     @Override
     public int getItemCount() {
         return mSteps.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView step_id ;
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private TextView step_id;
         private TextView step_desc;
-        private ImageView step_video_image ;
+        private ImageView step_video_image;
+
         public ViewHolder(View itemView) {
             super(itemView);
             step_id = (TextView) itemView.findViewById(R.id.step_id);
@@ -68,10 +71,11 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ViewHolder> 
 
         @Override
         public void onClick(View view) {
-            mOnStepClickListener.onStepClick(view,mSteps,getAdapterPosition());
+            mOnStepClickListener.onStepClick(view, mSteps, getAdapterPosition());
         }
     }
-    public void setStepsList(List<Step> mSteps){
-        this.mSteps = mSteps ;
+
+    public void setStepsList(List<Step> mSteps) {
+        this.mSteps = mSteps;
     }
 }

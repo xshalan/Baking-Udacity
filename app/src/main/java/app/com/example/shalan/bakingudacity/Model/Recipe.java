@@ -11,8 +11,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-public class Recipe implements Serializable
-{
+public class Recipe implements Serializable {
 
     @SerializedName("id")
     @Expose

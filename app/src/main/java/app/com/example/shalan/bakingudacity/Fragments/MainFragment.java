@@ -33,9 +33,9 @@ public class MainFragment extends Fragment implements OnRecipeClickListener {
     //    @BindView(R.id.recipe_recyclerView)
 //    RecyclerView Recipe_recyclerView ;
     RecipeAdapter recipeAdapter;
-    CoordinatorLayout coordinatorLayout ;
+    CoordinatorLayout coordinatorLayout;
     private RecipeAPI mRecipeAPI;
-    ProgressBar progressBar ;
+    ProgressBar progressBar;
     RecyclerView Recipe_recyclerView;
 
     public MainFragment() {
@@ -101,16 +101,15 @@ public class MainFragment extends Fragment implements OnRecipeClickListener {
             public void onFailure(Call<ArrayList<Recipe>> call, Throwable t) {
                 Log.v("Main", "Failed!" + t.toString());
                 progressBar.setVisibility(View.INVISIBLE);
-                Snackbar snackbar =  Snackbar
-                        .make(coordinatorLayout,"Check your connection!",Snackbar.LENGTH_SHORT)
+                Snackbar snackbar = Snackbar
+                        .make(getActivity().findViewById(android.R.id.content), "Check your connection!", Snackbar.LENGTH_INDEFINITE)
                         .setAction("RETRY", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                getRecipe() ;
+                                getRecipe();
                             }
                         });
                 snackbar.show();
-
 
 
             }

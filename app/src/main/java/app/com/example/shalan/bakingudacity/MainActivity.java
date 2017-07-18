@@ -21,6 +21,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        getIdlingResource();
+        if (mMainActivityIdlingResource != null) {
+            mMainActivityIdlingResource.setIdleState(true);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -31,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.main_fragment_container, fragment).commit();
 
 
-
     }
+
     @VisibleForTesting
     @NonNull
-    public IdlingResource getIdlingResource(){
+    public IdlingResource getIdlingResource() {
         if (mMainActivityIdlingResource == null)
-            mMainActivityIdlingResource = new MainActivityIdlingResource() ;
+            mMainActivityIdlingResource = new MainActivityIdlingResource();
 
         return mMainActivityIdlingResource;
     }
