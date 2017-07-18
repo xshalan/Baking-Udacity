@@ -2,6 +2,8 @@ package app.com.example.shalan.bakingudacity.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
@@ -26,19 +29,18 @@ import retrofit2.Response;
 import static app.com.example.shalan.bakingudacity.Utils.ApiUtils.getRecipes;
 
 
-public class MainFragment extends Fragment implements OnRecipeClickListener{
+public class MainFragment extends Fragment implements OnRecipeClickListener {
     //    @BindView(R.id.recipe_recyclerView)
 //    RecyclerView Recipe_recyclerView ;
-    RecipeAdapter recipeAdapter ;
-
-    private RecipeAPI mRecipeAPI ;
-
-    RecyclerView Recipe_recyclerView ;
+    RecipeAdapter recipeAdapter;
+    CoordinatorLayout coordinatorLayout ;
+    private RecipeAPI mRecipeAPI;
+    ProgressBar progressBar ;
+    RecyclerView Recipe_recyclerView;
 
     public MainFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -49,13 +51,12 @@ public class MainFragment extends Fragment implements OnRecipeClickListener{
     }
 
 
-
     @Override
-    public void onClick(View view, ArrayList<Recipe> recipeList , int Position) {
-        Intent intent = new Intent(getActivity(), DetailsActivity.class) ;
-        intent.putExtra("list",recipeList);
-        intent.putExtra("position",Position);
-        Log.v("Main",recipeList.get(Position).getIngredients().toString());
+    public void onClick(View view, ArrayList<Recipe> recipeList, int Position) {
+        Intent intent = new Intent(getActivity(), DetailsActivity.class);
+        intent.putExtra("list", recipeList);
+        intent.putExtra("position", Position);
+        Log.v("Main", recipeList.get(Position).getIngredients().toString());
         MainFragment.this.startActivity(intent);
 
     }
@@ -65,46 +66,56 @@ public class MainFragment extends Fragment implements OnRecipeClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.main_fragment, container, false) ;
-
+        View view = inflater.inflate(R.layout.main_fragment, container, false);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.coordinator_layout);
+        progressBar.setVisibility(View.VISIBLE);
         Recipe_recyclerView = (RecyclerView) view.findViewById(R.id.recipe_recyclerView);
-        recipeAdapter = new RecipeAdapter(getContext(),this);
-        if(getResources().getBoolean(R.bool.isTablet)){
-            GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2) ;
+        recipeAdapter = new RecipeAdapter(getContext(), this);
+        if (getResources().getBoolean(R.bool.isTablet)) {
+            GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
             Recipe_recyclerView.setLayoutManager(layoutManager);
-        }else {
+        } else {
             LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             Recipe_recyclerView.setLayoutManager(layoutManager);
         }
 
-
-
-
-        mRecipeAPI = getRecipes() ;
+        mRecipeAPI = getRecipes();
         getRecipe();
         return view;
     }
 
-    public void getRecipe(){
+    public void getRecipe() {
         mRecipeAPI.getRecipes().enqueue(new Callback<ArrayList<Recipe>>() {
             @Override
             public void onResponse(Call<ArrayList<Recipe>> call, Response<ArrayList<Recipe>> response) {
                 recipeAdapter.setmRecipeList(response.body());
                 recipeAdapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.INVISIBLE);
                 Recipe_recyclerView.setAdapter(recipeAdapter);
 
             }
 
             @Override
             public void onFailure(Call<ArrayList<Recipe>> call, Throwable t) {
-                Log.v("Main","Failed!" + t.toString()) ;
+                Log.v("Main", "Failed!" + t.toString());
+                progressBar.setVisibility(View.INVISIBLE);
+                Snackbar snackbar =  Snackbar
+                        .make(coordinatorLayout,"Check your connection!",Snackbar.LENGTH_SHORT)
+                        .setAction("RETRY", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                getRecipe() ;
+                            }
+                        });
+                snackbar.show();
+
+
 
             }
         });
     }
-
-
 
 
 }

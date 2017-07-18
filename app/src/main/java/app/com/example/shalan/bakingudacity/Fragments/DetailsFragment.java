@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -55,6 +56,25 @@ public class DetailsFragment extends Fragment implements OnStepClickListener{
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.details_activity_menu,menu);
+    }
+
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("RecyclerView_Position",
+                ((LinearLayoutManager)steps_recyclerView.getLayoutManager()).findFirstVisibleItemPosition());
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if(savedInstanceState != null){
+            ((LinearLayoutManager)steps_recyclerView.getLayoutManager())
+                    .scrollToPosition(savedInstanceState.getInt("RecyclerView_Position"));
+        }
     }
 
     @Override

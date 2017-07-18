@@ -5,7 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -43,6 +46,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         holder.ingredients.setText(Integer.toString(mRecipe.getIngredients().size()) );
         holder.serving.setText(Integer.toString(mRecipe.getServings()));
         holder.step.setText(Integer.toString(mRecipe.getSteps().size()) );
+        if(mRecipe.getImage().length() != 0){
+            Glide.with(mContext).load(mRecipe.getImage()).into(holder.recipe_image);
+        }else{
+            //Nothing to show ;
+        }
 
     }
 
@@ -62,6 +70,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         TextView serving ;
         //@BindView(R.id.steps)
         TextView step ;
+        ImageView recipe_image ;
         public ViewHolder(View itemView) {
             super(itemView);
             //ButterKnife.bind(this,itemView) ;
@@ -69,6 +78,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             ingredients  = (TextView) itemView.findViewById(R.id.ingredients);
             serving = (TextView) itemView.findViewById(R.id.serving);
             step = (TextView) itemView.findViewById(R.id.steps);
+            recipe_image = (ImageView) itemView.findViewById(R.id.recipe_image_view);
             itemView.setOnClickListener(this);
 
         }
