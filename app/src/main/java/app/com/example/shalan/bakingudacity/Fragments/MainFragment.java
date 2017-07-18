@@ -63,14 +63,21 @@ public class MainFragment extends Fragment implements OnRecipeClickListener {
 
 
     @Override
+    public void onStart() {
+        super.onStart();
+        progressBar.setVisibility(View.VISIBLE);
+        Recipe_recyclerView.setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.main_fragment, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.coordinator_layout);
-        progressBar.setVisibility(View.VISIBLE);
         Recipe_recyclerView = (RecyclerView) view.findViewById(R.id.recipe_recyclerView);
+
         recipeAdapter = new RecipeAdapter(getContext(), this);
         if (getResources().getBoolean(R.bool.isTablet)) {
             GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
@@ -87,12 +94,14 @@ public class MainFragment extends Fragment implements OnRecipeClickListener {
     }
 
     public void getRecipe() {
+
         mRecipeAPI.getRecipes().enqueue(new Callback<ArrayList<Recipe>>() {
             @Override
             public void onResponse(Call<ArrayList<Recipe>> call, Response<ArrayList<Recipe>> response) {
                 recipeAdapter.setmRecipeList(response.body());
                 recipeAdapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.INVISIBLE);
+                Recipe_recyclerView.setVisibility(View.VISIBLE);
                 Recipe_recyclerView.setAdapter(recipeAdapter);
 
             }

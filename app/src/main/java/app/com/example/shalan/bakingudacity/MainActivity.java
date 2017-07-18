@@ -14,6 +14,7 @@ import app.com.example.shalan.bakingudacity.Fragments.MainFragment;
 import app.com.example.shalan.bakingudacity.Utils.MainActivityIdlingResource;
 
 
+
 public class MainActivity extends AppCompatActivity {
 
     @Nullable

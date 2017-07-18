@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -94,6 +95,9 @@ public class StepDetailsFragment extends Fragment {
                     resetExoPlayer();
                     Uri new_url = Uri.parse(stepList.get(Position).getVideoURL());
                     initializePlayer(new_url);
+                }else {
+                    Toast.makeText(getContext(),"Go to the next step",Toast.LENGTH_SHORT).show(); ;
+
                 }
             }
         });
@@ -108,6 +112,8 @@ public class StepDetailsFragment extends Fragment {
                     resetExoPlayer();
                     Uri new_url = Uri.parse(stepList.get(Position).getVideoURL());
                     initializePlayer(new_url);
+                }else {
+                    Toast.makeText(getContext(),"It's the last step :)",Toast.LENGTH_SHORT).show(); ;
                 }
             }
         });

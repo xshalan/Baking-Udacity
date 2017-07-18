@@ -49,7 +49,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
             String ingredient = ingredients.get(i).getIngredient();
             String measure = ingredients.get(i).getMeasure();
             float quantity = ingredients.get(i).getQuantity();
-            description += " * " + quantity + " " + measure + " " + ingredient + "\n";
+            description += " *  " + quantity + " " + measure + " " + ingredient + "\n";
         }
         if (description != null && recipe_name != null) {
             view.setTextViewText(R.id.text_ingre_list, description);
