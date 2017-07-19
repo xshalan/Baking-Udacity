@@ -127,7 +127,7 @@ public class StepDetailsFragment extends Fragment {
                 exoPlayerView.setVisibility(View.INVISIBLE);
                 exo_thumbnail.setVisibility(View.VISIBLE);
                 playbutton.setVisibility(View.VISIBLE);
-                Glide.with(getContext()).load(thumbnail_url).into(exo_thumbnail);
+                Glide.with((Fragment) this).load(thumbnail_url).into(exo_thumbnail);
                 playbutton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

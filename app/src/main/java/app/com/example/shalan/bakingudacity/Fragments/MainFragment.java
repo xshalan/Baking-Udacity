@@ -26,6 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static app.com.example.shalan.bakingudacity.MainActivity.mMainActivityIdlingResource;
 import static app.com.example.shalan.bakingudacity.Utils.ApiUtils.getRecipes;
 
 
@@ -37,6 +38,7 @@ public class MainFragment extends Fragment implements OnRecipeClickListener {
     private RecipeAPI mRecipeAPI;
     ProgressBar progressBar;
     RecyclerView Recipe_recyclerView;
+
 
     public MainFragment() {
         // Required empty public constructor
@@ -104,6 +106,9 @@ public class MainFragment extends Fragment implements OnRecipeClickListener {
                 Recipe_recyclerView.setVisibility(View.VISIBLE);
                 Recipe_recyclerView.setAdapter(recipeAdapter);
 
+                if (mMainActivityIdlingResource != null) {
+                    mMainActivityIdlingResource.setIdleState(true);
+                }
             }
 
             @Override
@@ -124,6 +129,8 @@ public class MainFragment extends Fragment implements OnRecipeClickListener {
             }
         });
     }
+
+
 
 
 }

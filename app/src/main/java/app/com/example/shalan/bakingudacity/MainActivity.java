@@ -14,27 +14,19 @@ import app.com.example.shalan.bakingudacity.Fragments.MainFragment;
 import app.com.example.shalan.bakingudacity.Utils.MainActivityIdlingResource;
 
 
-
 public class MainActivity extends AppCompatActivity {
 
     @Nullable
-    private MainActivityIdlingResource mMainActivityIdlingResource;
+    public static MainActivityIdlingResource mMainActivityIdlingResource;
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        getIdlingResource();
-        if (mMainActivityIdlingResource != null) {
-            mMainActivityIdlingResource.setIdleState(true);
-        }
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        getIdlingResource();
         Fragment fragment = new MainFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -42,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
     @VisibleForTesting
     @NonNull
     public IdlingResource getIdlingResource() {
@@ -51,4 +42,5 @@ public class MainActivity extends AppCompatActivity {
 
         return mMainActivityIdlingResource;
     }
+
 }
