@@ -150,7 +150,7 @@ public class DetailsFragment extends Fragment implements OnStepClickListener {
             fragment.setArguments(bundle);
 
             getFragmentManager().beginTransaction()
-                    .add(R.id.step_details_fragment_tablet, fragment)
+                    .replace(R.id.step_details_fragment_tablet, fragment)
                     .commit();
         } else {
             Intent intent = new Intent(getActivity(), StepDetailsActivity.class);

@@ -52,11 +52,18 @@ public class StepDetailsFragment extends Fragment {
 
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_step_details, container, false);
+        setRetainInstance(true) ;
+
         no_video_image = (ImageView) view.findViewById(R.id.exo_no_video);
         exo_thumbnail = (ImageView) view.findViewById(R.id.exo_thumbnail);
         playbutton = (ImageView) view.findViewById(R.id.exo_thumbnail_play);
@@ -161,6 +168,7 @@ public class StepDetailsFragment extends Fragment {
             );
             exoPlayer.prepare(mediaSource);
             exoPlayer.setPlayWhenReady(true);
+
 
         } else {
             exoPlayerView.setVisibility(View.INVISIBLE);

@@ -17,15 +17,19 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static org.hamcrest.Matchers.allOf;
 
 /**
  * Created by noura on 09/07/2017.
  */
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
+
     private IdlingResource mIdlingResource ;
     @Rule
     public ActivityTestRule<MainActivity> mainActivityTest = new ActivityTestRule<MainActivity>(MainActivity.class) ;
+
+
 
     @Before
     public void registerIdlingResource() {
@@ -42,6 +46,8 @@ public class MainActivityTest {
         onView(withId(R.id.ingredient_card_text))
                 .check(matches(isDisplayed())) ;
     }
+
+
 
     @After
     public void unregisterIdlingResource() {

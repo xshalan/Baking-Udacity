@@ -20,17 +20,20 @@ public class StepDetailsActivity extends AppCompatActivity {
 
         setContentView(R.layout.step_details_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        if (savedInstanceState == null) {
+            Fragment fragment = new StepDetailsFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.step_details_container, fragment).commit();
+        }
         Intent intent = getIntent();
         List<Step> stepList = (List<Step>) intent.getSerializableExtra("step_list");
         int Position = intent.getIntExtra("step_position", 0);
 
         getSupportActionBar().setTitle(stepList.get(Position).getShortDescription());
 
-        Fragment fragment = new StepDetailsFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.step_details_container, fragment).commit();
+
+
     }
 
 }
